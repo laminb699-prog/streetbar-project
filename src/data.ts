@@ -171,7 +171,7 @@ export const categories: Category[] = [
   },
   {
     id: "jus",
-    name: "Jus Frais (16 OZ)",
+    name: "smoothies & fresh fruit drinks",
     tagline: "Fresh fruit drinks",
     image: images.juice,
     products: products(
