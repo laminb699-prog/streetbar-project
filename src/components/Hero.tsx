@@ -27,8 +27,8 @@ export default function Hero() {
           width={1920}
           height={1076}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/80 via-ink-950/70 to-ink-950" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/30 via-ink-950/15 to-ink-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/20 via-ink-950/5 to-transparent" />
       </div>
 
       {/* Decorative gold glow */}
