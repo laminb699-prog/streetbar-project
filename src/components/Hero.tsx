@@ -1,6 +1,13 @@
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data";
 import { useLanguage } from "../i18n/LanguageContext";
+import { resolveItemImage } from "../lib/itemImage";
+
+const heroBg = resolveItemImage(
+  "hero-bg.jpg",
+  "https://images.pexels.com/photos/20582722/pexels-photo-20582722.jpeg?auto=compress&cs=tinysrgb&w=1600"
+);
+const logoMark = resolveItemImage("logo.png", "");
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -12,13 +19,13 @@ export default function Hero() {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src="https://images.pexels.com/photos/20582722/pexels-photo-20582722.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          alt="Chocolate drizzled crêpes on an elegant plate"
+          src={heroBg}
+          alt="Artificial grass wall backdrop at Street Bar"
           className="h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
-          width={1600}
-          height={900}
+          width={1920}
+          height={1076}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink-950/80 via-ink-950/70 to-ink-950" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/40 to-transparent" />
@@ -33,12 +40,21 @@ export default function Hero() {
           {t.hero.badge}
         </div>
 
-        <h1
-          className="font-display text-6xl font-bold leading-[1.05] tracking-tight sb-fade-in sm:text-7xl md:text-8xl"
+        <div
+          className="sb-fade-in flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5"
           style={{ animationDelay: "0.1s" }}
         >
-          <span className="sb-text-gold">Street Bar</span>
-        </h1>
+          {logoMark && (
+            <img
+              src={logoMark}
+              alt="Street Bar logo"
+              className="sb-logo-mark sb-logo-always-invert h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
+            />
+          )}
+          <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+            <span className="sb-neon-pink">Street Bar Crêpes</span>
+          </h1>
+        </div>
 
         <p
           className="mt-4 text-sm font-medium tracking-[0.4em] text-gold-200 sb-fade-in sm:text-base"

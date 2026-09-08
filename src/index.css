@@ -66,6 +66,41 @@ html.light .sb-dark-text { color: #111111; }
 @keyframes sb-slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
 @keyframes sb-slide-in-left { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
+/* Neon pink flicker, used for the "Street Bar Crêpes" name */
+.sb-neon-pink {
+  color: #ff2fa0;
+  text-shadow:
+    0 0 4px rgba(255, 47, 160, 0.85),
+    0 0 11px rgba(255, 47, 160, 0.75),
+    0 0 19px rgba(255, 47, 160, 0.6),
+    0 0 40px rgba(255, 20, 147, 0.5),
+    0 0 80px rgba(255, 20, 147, 0.3);
+  animation: sb-neon-flicker 5s infinite;
+}
+@keyframes sb-neon-flicker {
+  0%, 17%, 22%, 24%, 54%, 58%, 100% {
+    text-shadow:
+      0 0 4px rgba(255, 47, 160, 0.85),
+      0 0 11px rgba(255, 47, 160, 0.75),
+      0 0 19px rgba(255, 47, 160, 0.6),
+      0 0 40px rgba(255, 20, 147, 0.5),
+      0 0 80px rgba(255, 20, 147, 0.3);
+    opacity: 1;
+  }
+  18%, 21%, 23%, 55%, 57% {
+    text-shadow: none;
+    opacity: 0.55;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-neon-pink { animation: none; }
+}
+
+/* Logo is authored as black-on-transparent; flip to white for dark surfaces */
+.sb-logo-mark { filter: none; }
+html:not(.light) .sb-logo-mark.sb-logo-invert-dark { filter: invert(1); }
+.sb-logo-always-invert { filter: invert(1); }
+
 .sb-reveal { opacity: 0; }
 .sb-reveal.sb-in { animation: sb-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .sb-fade-in { animation: sb-fade-in 1s ease forwards; }
