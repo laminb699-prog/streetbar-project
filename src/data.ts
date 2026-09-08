@@ -1,15 +1,4 @@
-import crepesSucreesImg from "./assets/menu/crepes-sucrees.jpg";
-import crepesSaleesImg from "./assets/menu/crepes-salees.jpg";
-import pancakesImg from "./assets/menu/pancakes.jpg";
-import bubbleWaffleImg from "./assets/menu/bubble-waffle.jpg";
-import milkshakesImg from "./assets/menu/milkshakes-frappes.jpg";
-import mojitoImg from "./assets/menu/virgin-mojito.jpg";
-import iceLatteImg from "./assets/menu/ice-latte.jpg";
-import jusImg from "./assets/menu/jus.jpg";
-import boissonsChaudesImg from "./assets/menu/boissons-chaudes.jpg";
-import qashtoutaImg from "./assets/menu/sweets-qashtouta.jpg";
-import extrasImg from "./assets/menu/extras.jpg";
-import { resolveItemImage } from "./lib/itemImage";
+import { resolveItemImage, resolveCategoryImage } from "./lib/itemImage";
 
 export type Product = {
   name: string;
@@ -30,8 +19,9 @@ export const WHATSAPP_URL = "https://wa.me/212713809797";
 export const ADDRESS = "Boulevard Al Masjid, in front of Al Jazira Store, Dakhla, Morocco";
 
 // Each product looks for a photo file matching its filename in
-// src/assets/menu/items/. If none exists yet, it falls back to the
-// category's shared photo automatically.
+// src/assets/menu/items/, and each category looks for a photo matching
+// its id directly in src/assets/menu/. Any image extension works, and a
+// missing file just falls back gracefully instead of breaking the build.
 const products = (
   entries: Array<[string, number, string]>,
   fallbackImage: string
@@ -47,7 +37,7 @@ export const categories: Category[] = [
     id: "crepes-sucrees",
     name: "Crêpes Sucrées",
     tagline: "From classic to signature VIP crêpes",
-    image: crepesSucreesImg,
+    image: resolveCategoryImage("crepes-sucrees"),
     products: products(
       [
         ["Crêpe Nutella", 17, "crepes-sucrees__crepe-nutella.jpg"],
@@ -63,14 +53,14 @@ export const categories: Category[] = [
         ["Crêpe King Street", 40, "crepes-sucrees__crepe-king-street.jpg"],
         ["Crêpe VIP", 50, "crepes-sucrees__crepe-vip.jpg"],
       ],
-      crepesSucreesImg
+      resolveCategoryImage("crepes-sucrees")
     ),
   },
   {
     id: "crepes-salees",
     name: "Crêpes Salées",
     tagline: "Savoury crêpes prepared to order",
-    image: crepesSaleesImg,
+    image: resolveCategoryImage("crepes-salees"),
     products: products(
       [
         ["Fromage", 25, "crepes-salees__fromage.jpg"],
@@ -80,14 +70,14 @@ export const categories: Category[] = [
         ["Mix", 35, "crepes-salees__mix.jpg"],
         ["Pizza Mix", 35, "crepes-salees__pizza-mix.jpg"],
       ],
-      crepesSaleesImg
+      resolveCategoryImage("crepes-salees")
     ),
   },
   {
     id: "pancakes",
     name: "Pancakes",
     tagline: "Fluffy stacks made for sharing",
-    image: pancakesImg,
+    image: resolveCategoryImage("pancakes"),
     products: products(
       [
         ["Miel & Beurre", 15, "pancakes__miel-beurre.jpg"],
@@ -96,14 +86,14 @@ export const categories: Category[] = [
         ["Nutella Pistache", 30, "pancakes__nutella-pistache.jpg"],
         ["Royal", 40, "pancakes__royal.jpg"],
       ],
-      pancakesImg
+      resolveCategoryImage("pancakes")
     ),
   },
   {
     id: "bubble-waffle",
     name: "Bubble Waffle",
     tagline: "Crisp outside, soft inside",
-    image: bubbleWaffleImg,
+    image: resolveCategoryImage("bubble-waffle"),
     products: products(
       [
         ["Chocolate", 20, "bubble-waffle__chocolate.jpg"],
@@ -112,14 +102,14 @@ export const categories: Category[] = [
         ["Pistache", 35, "bubble-waffle__pistache.jpg"],
         ["King Street", 40, "bubble-waffle__king-street.jpg"],
       ],
-      bubbleWaffleImg
+      resolveCategoryImage("bubble-waffle")
     ),
   },
   {
     id: "milkshakes-frappes",
     name: "Milkshakes & Frappés",
     tagline: "Thick, creamy and freshly blended",
-    image: milkshakesImg,
+    image: resolveCategoryImage("milkshakes-frappes"),
     products: products(
       [
         ["Milkshake Chocolat", 30, "milkshakes-frappes__milkshake-chocolat.jpg"],
@@ -135,14 +125,14 @@ export const categories: Category[] = [
         ["Frappé Matcha", 30, "milkshakes-frappes__frappe-matcha.jpg"],
         ["Frappé Spanish", 30, "milkshakes-frappes__frappe-spanish.jpg"],
       ],
-      milkshakesImg
+      resolveCategoryImage("milkshakes-frappes")
     ),
   },
   {
     id: "virgin-mojito",
     name: "Virgin Mojito",
     tagline: "Fresh, sparkling and alcohol-free",
-    image: mojitoImg,
+    image: resolveCategoryImage("virgin-mojito"),
     products: products(
       [
         ["Classique", 20, "virgin-mojito__classique.jpg"],
@@ -151,14 +141,14 @@ export const categories: Category[] = [
         ["Ananas", 25, "virgin-mojito__ananas.jpg"],
         ["Fraise", 25, "virgin-mojito__fraise.jpg"],
       ],
-      mojitoImg
+      resolveCategoryImage("virgin-mojito")
     ),
   },
   {
     id: "ice-latte",
     name: "Ice Latte",
     tagline: "Cold coffee with a smooth finish",
-    image: iceLatteImg,
+    image: resolveCategoryImage("ice-latte"),
     products: products(
       [
         ["Classique", 20, "ice-latte__classique.jpg"],
@@ -169,14 +159,14 @@ export const categories: Category[] = [
         ["Matcha Coconut", 30, "ice-latte__matcha-coconut.jpg"],
         ["Matcha Strawberry", 30, "ice-latte__matcha-strawberry.jpg"],
       ],
-      iceLatteImg
+      resolveCategoryImage("ice-latte")
     ),
   },
   {
     id: "jus",
     name: "Jus Frais (16 OZ)",
     tagline: "Fresh fruit drinks",
-    image: jusImg,
+    image: resolveCategoryImage("jus"),
     products: products(
       [
         ["Citron", 10, "jus__citron.jpg"],
@@ -188,17 +178,17 @@ export const categories: Category[] = [
         ["Mangue", 20, "jus__mangue.jpg"],
         ["Ananas", 20, "jus__ananas.jpg"],
         ["Avocat Fruit Sec", 25, "jus__avocat-fruit-sec.jpg"],
-        ["Paradise", 25, "jus__paradise.jpg"],
+        ["Paradise", 30, "jus__paradise.jpg"],
         ["Za3za3", 30, "jus__za3za3.jpg"],
       ],
-      jusImg
+      resolveCategoryImage("jus")
     ),
   },
   {
     id: "boissons-chaudes",
     name: "Boissons Chaudes",
     tagline: "Warm coffee and comforting drinks",
-    image: boissonsChaudesImg,
+    image: resolveCategoryImage("boissons-chaudes"),
     products: products(
       [
         ["Espresso", 12, "boissons-chaudes__espresso.jpg"],
@@ -212,14 +202,14 @@ export const categories: Category[] = [
         ["Cappuccino Viennois", 18, "boissons-chaudes__cappuccino-viennois.jpg"],
         ["Mocha / Vanille / Caramel", 20, "boissons-chaudes__mocha-vanille-caramel.jpg"],
       ],
-      boissonsChaudesImg
+      resolveCategoryImage("boissons-chaudes")
     ),
   },
   {
     id: "sweets-qashtouta",
     name: "Sweets & Qachtouta",
     tagline: "Mini cups and Moroccan-style sweet trays",
-    image: qashtoutaImg,
+    image: resolveCategoryImage("sweets-qashtouta"),
     products: products(
       [
         ["Sweet Cup Oreo", 15, "sweets-qashtouta__sweet-cup-oreo.jpg"],
@@ -239,14 +229,14 @@ export const categories: Category[] = [
         ["Qachtouta Dubai", 40, "sweets-qashtouta__qachtouta-dubai.jpg"],
         ["Qachtouta Mix", 40, "sweets-qashtouta__qachtouta-mix.jpg"],
       ],
-      qashtoutaImg
+      resolveCategoryImage("sweets-qashtouta")
     ),
   },
   {
     id: "extras",
     name: "Extras",
     tagline: "Add scoops and toppings to your order",
-    image: extrasImg,
+    image: resolveCategoryImage("extras"),
     products: products(
       [
         ["1 Boule Glace", 8, "extras__1-boule-glace.jpg"],
@@ -265,21 +255,9 @@ export const categories: Category[] = [
         ["Crème Kinder", 10, "extras__creme-kinder.jpg"],
         ["Milka Tablet", 14, "extras__milka-tablet.jpg"],
       ],
-      extrasImg
+      resolveCategoryImage("extras")
     ),
   },
 ];
 
-export const galleryImages = [
-  crepesSucreesImg,
-  milkshakesImg,
-  pancakesImg,
-  bubbleWaffleImg,
-  mojitoImg,
-  iceLatteImg,
-  crepesSaleesImg,
-  qashtoutaImg,
-  extrasImg,
-  boissonsChaudesImg,
-  jusImg,
-];
+export const galleryImages = categories.map((c) => c.image);
