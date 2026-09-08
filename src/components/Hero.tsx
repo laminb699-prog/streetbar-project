@@ -7,7 +7,6 @@ const heroBg = resolveItemImage(
   "hero-bg.jpg",
   "https://images.pexels.com/photos/20582722/pexels-photo-20582722.jpeg?auto=compress&cs=tinysrgb&w=1600"
 );
-const logoMark = resolveItemImage("logo.png", "");
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -44,13 +43,6 @@ export default function Hero() {
           className="sb-fade-in flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5"
           style={{ animationDelay: "0.1s" }}
         >
-          {logoMark && (
-            <img
-              src={logoMark}
-              alt="Street Bar logo"
-              className="sb-logo-mark sb-logo-always-invert h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
-            />
-          )}
           <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
             <span className="sb-neon-pink">Street Bar Crêpes</span>
           </h1>
