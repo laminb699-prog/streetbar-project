@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-:root {
+@theme {
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
@@ -63,6 +63,8 @@ html.light .sb-dark-text { color: #111111; }
 @keyframes sb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes sb-spin { to { transform: rotate(360deg); } }
 @keyframes sb-pulse-ring { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes sb-slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes sb-slide-in-left { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
 .sb-reveal { opacity: 0; }
 .sb-reveal.sb-in { animation: sb-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }

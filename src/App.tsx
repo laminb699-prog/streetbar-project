@@ -9,6 +9,7 @@ import Order from "./components/Order";
 import Contact from "./components/Contact";
 import FloatingButtons from "./components/FloatingButtons";
 import Footer from "./components/Footer";
+import Cart from "./components/Cart";
 
 const THEME_KEY = "streetbar-theme";
 
@@ -48,6 +49,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingButtons />
+      <Cart />
     </>
   );
 }

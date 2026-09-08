@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { ArrowUp, MessageCircle, Phone } from "lucide-react";
+import { ArrowUp, MessageCircle, Phone, ShoppingBag } from "lucide-react";
 import { PHONE, WHATSAPP_URL } from "../data";
+import { useCart } from "../cart/CartContext";
 
 export default function FloatingButtons() {
   const [showTop, setShowTop] = useState(false);
+  const { totalItems, openCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 600);
@@ -23,10 +25,23 @@ export default function FloatingButtons() {
         <ArrowUp className="h-5 w-5" />
       </button>
 
+      <button
+        onClick={openCart}
+        aria-label="Open cart"
+        className="relative grid h-12 w-12 place-items-center rounded-full bg-gold-400 text-ink-950 shadow-lg transition-all hover:scale-110"
+      >
+        <ShoppingBag className="h-5 w-5" />
+        {totalItems > 0 && (
+          <span className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-[#25D366] text-[11px] font-bold text-white">
+            {totalItems > 9 ? "9+" : totalItems}
+          </span>
+        )}
+      </button>
+
       <a
         href={`tel:+${PHONE}`}
         aria-label="Call Street Bar"
-        className="relative grid h-12 w-12 place-items-center rounded-full bg-gold-400 text-ink-950 shadow-lg transition-all hover:scale-110"
+        className="relative grid h-12 w-12 place-items-center rounded-full sb-glass border border-white/10 text-gold-200 shadow-lg transition-all hover:scale-110"
       >
         <Phone className="h-5 w-5" />
       </a>

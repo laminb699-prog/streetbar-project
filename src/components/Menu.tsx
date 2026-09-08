@@ -1,27 +1,27 @@
 import { useEffect, useMemo, useState } from "react";
-import { MessageCircle, Search, X } from "lucide-react";
-import { categories, WHATSAPP_URL, type Category } from "../data";
+import { Minus, Plus, Search, X } from "lucide-react";
+import { categories, type Category } from "../data";
 import { useReveal, useBodyScrollLock } from "../hooks/useReveal";
 import { useLanguage } from "../i18n/LanguageContext";
-
-function orderLink(productName: string, price: number) {
-  const msg = encodeURIComponent(
-    `Hello Street Bar! I'd like to order: ${productName} (${price} MAD).`
-  );
-  return `${WHATSAPP_URL}?text=${msg}`;
-}
+import { useCart } from "../cart/CartContext";
 
 function ProductCard({
+  categoryId,
   name,
   price,
   image,
-  orderLabel,
+  addLabel,
 }: {
+  categoryId: string;
   name: string;
   price: number;
   image: string;
-  orderLabel: string;
+  addLabel: string;
 }) {
+  const { addItem, setQuantity, quantityFor } = useCart();
+  const key = `${categoryId}__${name}`;
+  const qty = quantityFor(key);
+
   return (
     <div className="sb-card sb-surface group overflow-hidden rounded-2xl border sb-border">
       <div className="sb-img-zoom relative aspect-[4/3] overflow-hidden">
@@ -40,15 +40,34 @@ function ProductCard({
       </div>
       <div className="p-4">
         <h4 className="font-display text-base font-semibold leading-snug">{name}</h4>
-        <a
-          href={orderLink(name, price)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 flex items-center justify-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/5 py-2.5 text-xs font-semibold tracking-wide text-gold-200 transition-all hover:bg-gold-400/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
-        >
-          <MessageCircle className="h-4 w-4" />
-          {orderLabel}
-        </a>
+
+        {qty === 0 ? (
+          <button
+            onClick={() => addItem({ key, name, price, image })}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/5 py-2.5 text-xs font-semibold tracking-wide text-gold-200 transition-all hover:bg-gold-400/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+          >
+            <Plus className="h-4 w-4" />
+            {addLabel}
+          </button>
+        ) : (
+          <div className="mt-3 flex items-center justify-between rounded-full border border-gold-400/40 bg-gold-400/10 py-1.5 pl-1.5 pr-1.5">
+            <button
+              onClick={() => setQuantity(key, qty - 1)}
+              aria-label="Decrease quantity"
+              className="grid h-8 w-8 place-items-center rounded-full bg-gold-400 text-ink-950 transition-transform hover:scale-105"
+            >
+              <Minus className="h-4 w-4" />
+            </button>
+            <span className="text-sm font-bold text-gold-200">{qty}</span>
+            <button
+              onClick={() => setQuantity(key, qty + 1)}
+              aria-label="Increase quantity"
+              className="grid h-8 w-8 place-items-center rounded-full bg-gold-400 text-ink-950 transition-transform hover:scale-105"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -214,7 +233,14 @@ export default function Menu() {
             <p className="mt-1 text-sm sb-muted">{openCategory.tagline}</p>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {openCategory.products.map((p) => (
-                <ProductCard key={p.name} name={p.name} price={p.price} image={p.image} orderLabel={t.menu.order} />
+                <ProductCard
+                  key={p.name}
+                  categoryId={openCategory.id}
+                  name={p.name}
+                  price={p.price}
+                  image={p.image}
+                  addLabel={t.cart.addToCart}
+                />
               ))}
             </div>
           </div>

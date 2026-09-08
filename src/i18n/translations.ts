@@ -75,6 +75,19 @@ export type TranslationDict = {
   loader: {
     brand: string;
   };
+  cart: {
+    title: string;
+    empty: string;
+    emptyHint: string;
+    addToCart: string;
+    added: string;
+    remove: string;
+    subtotal: string;
+    checkoutWhatsapp: string;
+    clearCart: string;
+    itemsCount: (n: number) => string;
+    continueBrowsing: string;
+  };
 };
 
 export const translations: Record<Lang, TranslationDict> = {
@@ -162,6 +175,19 @@ export const translations: Record<Lang, TranslationDict> = {
     loader: {
       brand: "STREET BAR",
     },
+    cart: {
+      title: "Your Order",
+      empty: "Your cart is empty",
+      emptyHint: "Browse the menu and add items you'd like to order.",
+      addToCart: "Add",
+      added: "Added",
+      remove: "Remove",
+      subtotal: "Total",
+      checkoutWhatsapp: "Send order on WhatsApp",
+      clearCart: "Clear cart",
+      itemsCount: (n: number) => (n === 1 ? "1 item" : `${n} items`),
+      continueBrowsing: "Continue browsing",
+    },
   },
   fr: {
     nav: {
@@ -247,6 +273,19 @@ export const translations: Record<Lang, TranslationDict> = {
     loader: {
       brand: "STREET BAR",
     },
+    cart: {
+      title: "Votre commande",
+      empty: "Votre panier est vide",
+      emptyHint: "Parcourez le menu et ajoutez les articles souhaités.",
+      addToCart: "Ajouter",
+      added: "Ajouté",
+      remove: "Retirer",
+      subtotal: "Total",
+      checkoutWhatsapp: "Envoyer la commande sur WhatsApp",
+      clearCart: "Vider le panier",
+      itemsCount: (n: number) => (n === 1 ? "1 article" : `${n} articles`),
+      continueBrowsing: "Continuer mes achats",
+    },
   },
   ar: {
     nav: {
@@ -331,6 +370,19 @@ export const translations: Record<Lang, TranslationDict> = {
     },
     loader: {
       brand: "ستريت بار",
+    },
+    cart: {
+      title: "طلبك",
+      empty: "سلتك فارغة",
+      emptyHint: "تصفح القائمة وأضف ما ترغب في طلبه.",
+      addToCart: "إضافة",
+      added: "تمت الإضافة",
+      remove: "إزالة",
+      subtotal: "المجموع",
+      checkoutWhatsapp: "إرسال الطلب عبر واتساب",
+      clearCart: "إفراغ السلة",
+      itemsCount: (n: number) => `${n} منتجات`,
+      continueBrowsing: "متابعة التصفح",
     },
   },
 };
