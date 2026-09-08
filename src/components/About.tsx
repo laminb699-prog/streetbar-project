@@ -1,7 +1,17 @@
 import { useReveal } from "../hooks/useReveal";
 import { useLanguage } from "../i18n/LanguageContext";
+import { getFolderImages } from "../lib/itemImage";
+import AboutGallery from "./AboutGallery";
 
 const icons = ["🥞", "🧇", "🥤", "🍹", "🍸", "☕", "🍰", "🍨", "🥞"];
+
+const fallbackImage =
+  "https://images.pexels.com/photos/6463660/pexels-photo-6463660.jpeg?auto=compress&cs=tinysrgb&w=1000";
+
+const aboutImages = (() => {
+  const found = getFolderImages("about-gallery");
+  return found.length > 0 ? found : [fallbackImage];
+})();
 
 export default function About() {
   const { ref, visible } = useReveal();
@@ -17,15 +27,7 @@ export default function About() {
           <div className="grid items-center gap-14 lg:grid-cols-2">
             {/* Image side */}
             <div className="relative">
-              <div className="sb-img-zoom relative overflow-hidden rounded-[2rem] shadow-2xl">
-                <img
-                  src="https://images.pexels.com/photos/6463660/pexels-photo-6463660.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                  alt="Assorted milkshakes with toppings"
-                  className="aspect-[4/5] w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
-              </div>
+              <AboutGallery images={aboutImages} />
               {/* Floating badge */}
               <div className="sb-float absolute -bottom-6 -right-4 sb-glass rounded-2xl px-6 py-5 shadow-xl sm:-right-8 rtl:-right-auto rtl:-left-4 sm:rtl:-left-8">
                 <div className="font-display text-3xl font-bold sb-text-gold">100%</div>

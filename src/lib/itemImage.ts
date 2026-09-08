@@ -7,7 +7,7 @@
 // instead, so a missing or misnamed file can never break the build.
 
 const photoModules = import.meta.glob(
-  "../assets/menu/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  "../assets/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 
@@ -25,6 +25,13 @@ for (const path in photoModules) {
 export function resolveItemImage(filename: string, fallback: string): string {
   const base = stripExtension(filename).toLowerCase();
   return byBaseName.get(base) ?? fallback;
+}
+
+export function getFolderImages(folderName: string): string[] {
+  const matches = Object.keys(photoModules)
+    .filter((path) => path.includes(`/${folderName}/`))
+    .sort((a, b) => a.localeCompare(b));
+  return matches.map((path) => photoModules[path]);
 }
 
 const PLACEHOLDER =
