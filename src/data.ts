@@ -188,7 +188,7 @@ export const categories: Category[] = [
         ["Mangue", 20, "jus__mangue.jpg"],
         ["Ananas", 20, "jus__ananas.jpg"],
         ["Avocat Fruit Sec", 25, "jus__avocat-fruit-sec.jpg"],
-        ["Paradise", 30, "jus__paradise.jpg"],
+        ["Paradise", 25, "jus__paradise.jpg"],
         ["Za3za3", 30, "jus__za3za3.jpg"],
       ],
       jusImg
