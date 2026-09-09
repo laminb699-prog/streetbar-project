@@ -26,8 +26,8 @@ export default function Hero() {
           width={1920}
           height={1076}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/30 via-ink-950/15 to-ink-950/45" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/20 via-ink-950/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/55 via-ink-950/45 to-ink-950/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/55 via-ink-950/20 to-transparent" />
       </div>
 
       {/* Decorative gold glow */}
@@ -39,14 +39,12 @@ export default function Hero() {
           {t.hero.badge}
         </div>
 
-        <div
-          className="sb-fade-in flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5"
+        <h1
+          className="sb-fade-in font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
           style={{ animationDelay: "0.1s" }}
         >
-          <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="sb-neon-pink">Street Bar Crêpes</span>
-          </h1>
-        </div>
+          <span className="sb-neon-pink">Street Bar Crêpes</span>
+        </h1>
 
         <p
           className="mt-4 text-sm font-medium tracking-[0.4em] text-gold-200 sb-fade-in sm:text-base"

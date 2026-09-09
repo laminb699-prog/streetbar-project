@@ -11,11 +11,13 @@ export default function Logo({ className = "", showText = true }: LogoProps) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {logoMark ? (
-        <img
-          src={logoMark}
-          alt="Street Bar logo"
-          className="sb-logo-mark sb-logo-invert-dark h-11 w-11 object-contain"
-        />
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink-950/70 p-1.5 ring-1 ring-white/10">
+          <img
+            src={logoMark}
+            alt="Street Bar logo"
+            className="sb-logo-mark sb-logo-always-invert h-full w-full object-contain"
+          />
+        </span>
       ) : (
         <svg
           viewBox="0 0 64 64"

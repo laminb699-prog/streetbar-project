@@ -11,12 +11,14 @@ function ProductCard({
   price,
   image,
   addLabel,
+  onImageClick,
 }: {
   categoryId: string;
   name: string;
   price: number;
   image: string;
   addLabel: string;
+  onImageClick: (image: string, name: string) => void;
 }) {
   const { addItem, setQuantity, quantityFor } = useCart();
   const key = `${categoryId}__${name}`;
@@ -24,7 +26,11 @@ function ProductCard({
 
   return (
     <div className="sb-card sb-surface group overflow-hidden rounded-2xl border sb-border">
-      <div className="sb-img-zoom relative aspect-[4/3] overflow-hidden">
+      <button
+        onClick={() => onImageClick(image, name)}
+        aria-label={`View full photo of ${name}`}
+        className="sb-img-zoom relative block aspect-[4/3] w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+      >
         <img
           src={image}
           alt={name}
@@ -37,7 +43,7 @@ function ProductCard({
         <div className="absolute bottom-3 left-3 rounded-full sb-glass px-3 py-1 text-xs font-semibold text-gold-200 rtl:left-auto rtl:right-3">
           {price} MAD
         </div>
-      </div>
+      </button>
       <div className="p-4">
         <h4 className="font-display text-base font-semibold leading-snug">{name}</h4>
 
@@ -79,17 +85,23 @@ export default function Menu() {
   const [active, setActive] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [openCategory, setOpenCategory] = useState<Category | null>(null);
+  const [lightbox, setLightbox] = useState<{ image: string; name: string } | null>(null);
 
   useBodyScrollLock(openCategory !== null);
 
   useEffect(() => {
-    if (openCategory === null) return;
+    if (openCategory === null && lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenCategory(null);
+      if (e.key !== "Escape") return;
+      if (lightbox !== null) {
+        setLightbox(null);
+      } else {
+        setOpenCategory(null);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [openCategory]);
+  }, [openCategory, lightbox]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -240,9 +252,40 @@ export default function Menu() {
                   price={p.price}
                   image={p.image}
                   addLabel={t.cart.addToCart}
+                  onImageClick={(image, name) => setLightbox({ image, name })}
                 />
               ))}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fullscreen image lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[80] grid place-items-center bg-ink-950/90 p-4 backdrop-blur-sm sb-fade-in"
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.name}
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            aria-label="Close photo"
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full sb-glass text-white hover:text-gold-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div
+            className="sb-scale-in flex max-h-[90vh] max-w-3xl flex-col items-center gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightbox.image}
+              alt={lightbox.name}
+              className="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl"
+            />
+            <p className="font-display text-lg font-semibold text-white">{lightbox.name}</p>
           </div>
         </div>
       )}
