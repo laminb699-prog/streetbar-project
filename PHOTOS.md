@@ -96,7 +96,7 @@ This lists the exact filename each menu item is looking for.
 | Vanille (22 DH) | `ice-latte__vanille.jpg` |
 | Caramel (22 DH) | `ice-latte__caramel.jpg` |
 | Chocolat (22 DH) | `ice-latte__chocolat.jpg` |
-| Matcha Latte (25 DH) | `ice-latte__matcha-latte.jpg` |
+| Matcha Latte (25 DH) | `ice-latte__matcha.jpg` |
 | Matcha Coconut (30 DH) | `ice-latte__matcha-coconut.jpg` |
 | Matcha Strawberry (30 DH) | `ice-latte__matcha-strawberry.jpg` |
 
